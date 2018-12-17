@@ -2,25 +2,25 @@ let score = 0;
 document.getElementById('playerScore').innerHTML = score;
 
 const Enemy = function(x,y) {
-
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
 };
 
-
+// Update the enemy's position, required method for game
+// Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    if (this.x < 505) {
-        this.x += (125 * dt);
+    if (this.x < 510){
+    	this.x += (150 * dt);
     }
-    else {
-        this.x = -90;
+    else{
+    	this.x = -90;
     }
-
-    if(this.x > player.x-50 && this.x < player.x+50 && this.y < player.y+25 && this.y > player.y-25){
-        score = 0;
-        document.getElementById('playerScore').innerHTML = score;
-        player.reset();
+    if(this.x > player.x-50 && this.x < player.x+50 && this.y > player.y-35 && this.y < player.y+35){
+    	player.x = 200;
+    	player.y = 400;
+    	score = 0;
+    	document.getElementById('playerScore').innerHTML = score;
     }
 };
 
@@ -28,66 +28,55 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-
 const Player = function(){
-    this.sprite = 'images/char-boy.png';
-    this.x = 200;
-    this.y = 425;
+	this.sprite = 'images/char-boy.png';
+	this.x = 200;
+	this.y = 400;
 };
 
 Player.prototype.update = function(){
-    if (player.y < 20){
-        score++;
-        document.getElementById('playerScore').innerHTML = score;
-        this.reset();
-    }
+	if(this.y < 10){
+		score++;
+		document.getElementById('playerScore').innerHTML = score;
+		Player.call(this);
+	}
 };
 
 Player.prototype.render = function(){
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-Player.prototype.handleInput = function(direction) {
-    if(direction == 'left' && this.x > 0) {
-        this.x -= 30;
-    }
-    if(direction == 'right' && this.x < 400) {
-        this.x += 30;
-    }
-    if(direction == 'up' && this.y > 3) {
-        this.y -= 30;
-    }
-    if(direction == 'down' && this.y < 400) {
-        this.y += 30;
-    }
+	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 Player.prototype.reset = function(){
-    this.x = 200;
-    this.y = 425;
+	this.x = 200;
+	this.y = 400;
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+Player.prototype.handleInput = function(direction){
+	if(direction == 'left' && this.x > 0){
+		this.x-=20
+	}
+	if(direction == 'right' && this.x < 410){
+	this.x+=20
+	}
+	if(direction == 'up' && this.y > 0){
+	this.y-=20
+	}
+	if(direction == 'down' && this.y < 430){
+	this.y+=20
+	}
+};
+const enemy1 = new Enemy(-90, 140)
+const enemy2 = new Enemy(-190, 70);
+const enemy3 = new Enemy(-290, 210);
+const enemy4 = new Enemy(-490, 140);
+const enemy5 = new Enemy(-390, 70);
 
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-var enemy1 = new Enemy(-90, 60);
-var enemy2 = new Enemy(-190, 140);
-var enemy3 = new Enemy(-390, 140);
-var enemy4 = new Enemy(-890, 230);
-
-var allEnemies = [enemy1, enemy2, enemy3, enemy4];
-
-var player = new Player;
-
+const allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5]
+const player = new Player();
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keypress', function(e) {
-    var allowedKeys = {
+    let allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
@@ -96,4 +85,3 @@ document.addEventListener('keypress', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-document.addEventListener('')
