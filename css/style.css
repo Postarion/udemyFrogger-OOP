@@ -3,4 +3,75 @@ body {
     background-color: #1b1a1a;
     color: #f4f4f4;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
 }
+.topSite{
+    height: 100px;
+}
+.btn{
+    position:relative;
+    transition: .5s ease;
+    top: 50px;
+    left: 220px;
+    cursor: pointer; 
+    background: transparent;
+    border: none;
+}
+
+.btn:focus { 
+background: #000000; 
+}
+
+.lightbox{ 
+    position: relative; 
+	top: 0; 
+	left: 0; 
+    right: 0; 
+    bottom: 0;
+	display: flex; 
+	justify-content: center; 
+    align-items: center; 
+}
+
+.lightbox:before { 
+	content: ''; 
+	display: block; 
+	position: relative; 
+	left: 0; 
+	right: 0; 
+	top: 0; 
+	bottom: 0; 
+	background: rgba(0,0,0,.7); 
+} 
+
+.lightbox_content { 
+    min-width: 500px; 
+    position: absolute;
+    margin: auto;;
+    right: 0;
+    left: 0;
+    max-height: 300px;
+    max-width: 510px;
+	background: #fff; 
+	color: #222; 
+    padding: 15px;
+	border-radius: 2px; 
+}
+.lightbox_header { 
+	text-align: center; 
+	font-family: 'Bodoni 72', serif; 
+	font-weight: 100; 
+	letter-spacing: 4px; 
+	text-transform: uppercase; 
+	font-size: 24px; 
+}
+
+.lightbox_form-control { 
+	width: 100%; 
+	margin-bottom: 35px; 
+}
+.lightbox_label { 
+	text-transform: uppercase; 
+	width: 100%; 
+	margin-bottom: 15px; 
+	display: block; 

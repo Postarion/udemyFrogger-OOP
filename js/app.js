@@ -1,6 +1,6 @@
 let score = 0;
 document.getElementById('playerScore').innerHTML = score;
-
+let ps = 'images/char-boy.png'
 const Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
@@ -28,8 +28,8 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-const Player = function(){
-	this.sprite = 'images/char-boy.png';
+let Player = function(){
+	this.sprite = ps;
 	this.x = 200;
 	this.y = 400;
 };
@@ -39,16 +39,18 @@ Player.prototype.update = function(){
 		score++;
 		document.getElementById('playerScore').innerHTML = score;
 		Player.call(this);
+
 	}
 };
 
 Player.prototype.render = function(){
-	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+	ctx.drawImage(Resources.get(ps), this.x, this.y);
 };
 
 Player.prototype.reset = function(){
 	this.x = 200;
 	this.y = 400;
+	this.sprite = ps;
 };
 
 Player.prototype.handleInput = function(direction){
@@ -71,7 +73,7 @@ const enemy3 = new Enemy(-290, 210);
 const enemy4 = new Enemy(-490, 140);
 const enemy5 = new Enemy(-390, 70);
 
-const allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5]
+const allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
 const player = new Player();
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -85,3 +87,8 @@ document.addEventListener('keypress', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+// function closeLightBox(e) {
+// 	lightBox.style.display = "none";
+// 	ps = e;
+//   };
